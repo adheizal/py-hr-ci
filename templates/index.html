@@ -1,0 +1,81 @@
+{% include 'header.html' %}
+
+<div class="container">
+<div class="jumbotron">
+  <div class="container">
+    <h1 class="display-4">Task Management App</h1>
+    <p class="lead">This is a simple task management app for CRUD operations
+        on tasks. The tasks can also be listed. Filters like end-date before
+        a given date, list created after a given date can be applied as well.
+    </p>
+  </div>
+</div>
+</div>
+<div class="container">
+    <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+  <div class="collapse navbar-collapse" id="navPages">
+      <i class="fa fa-bars" ng-click="listTasks()" data-toggle="tooltip"
+         data-placement="top" title="List all tasks" onmouseover=""
+         style="cursor: pointer;"></i>
+
+  </div>
+  <div class="navbar-right" id="task-list-date-range">
+      <button type="button" class="btn btn-primary btn-default" data-toggle="modal"
+              data-target="#listRange">Date Range Search</button>
+  </div>
+</nav>
+</div>
+<!-- Card display -->
+<div class="container">
+    <br><br>
+        <div class="card-columns" ng-if="tasks.indexOf('No task') !=0">
+            <div class="card hoverable" ng-repeat="task in tasks">
+                <div class="card-block">
+                    <h4 id="#tName" class="card-title">{a task.task_name a}</h4>
+                    <table class="table table-bordered">
+                        <tbody>
+                        <tr>
+                            <td><strong>Description</strong></td><td><p
+                                id="tDesc" class="card-text">{a task.task_description
+                        a}</p></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Created on</strong></td><td><p id="tCD"
+                                                       class="card-text">{a task.task_create_date
+                        a}</p></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Ending on</strong></td><td><p id="tED"
+                                                      class="card-text">{a task.task_end_date a}</p></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Owned by</strong></td><td><p id="tOwn"
+                                                     class="card-text">{a task.task_owner a}</p></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer">
+                    <i class="fa fa-pencil" ng-click="getTask(task.task_id)"
+                       data-toggle="modal"
+                       data-target="#updateTask"
+                       data-placement="top" title="Edit Task"
+                        onmouseover="" style="cursor: pointer;"></i>
+                    &nbsp;&nbsp;
+                    <i class="fa fa-trash-o"
+                       ng-click="getTask(task.task_id)" data-toggle="modal"
+                       data-target="#deleteTask"
+                       data-placement="top" title="Delete Task"
+                       onmouseover="" style="cursor: pointer;"></i>
+                </div>
+            </div>
+        </div>
+        <div class="header" ng-if="tasks.indexOf('No task') == 0">
+            <!-- tasks has the message here -->
+            <h3 class="text-center">{a tasks a}</h3>
+            <h2 class="text-center">Click <i class="fa fa-bars"></i> to
+                reload all tasks</h2>
+        </div>
+</div>
+{% include 'modals.html' %}
+{% include 'footer.html' %}
